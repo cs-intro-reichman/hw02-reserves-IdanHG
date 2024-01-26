@@ -14,7 +14,35 @@ public class OneOfEachStats {
 		int seed = Integer.parseInt(args[1]);
 		// Initailizes a random numbers generator with the given seed value
         Random generator = new Random(seed);  
-		
+		int f2 = 0; //counts num of families with 2 children
+		int f3 = 0; //counts num of families with 3 children
+		int f4 = 0; //counts num of families with 4+ children
+		double avg; //will be the average of children per family
+		int totalChildren = 0; // count num of total kids
+		for (int i = 1; i <= T; i++) {
+			int b = 0 ; //counts number of boys
+			int g = 0 ; //counts number of girls
+			while (b == 0 || g == 0) {
+				double s = generator.nextDouble() ;
+				if ( s <= 0.5 ) {
+					b++ ;
+				}
+				else {
+					g++ ;
+				}
+			}
+			int famKids = b + g ; //count num of kids in 1 family 
+			if (famKids == 2) f2++ ;
+			else if (famKids == 3) f3++ ;
+			else f4++ ;
+			totalChildren += famKids ;
+		}
+		avg = (double) totalChildren / T ; 
+		System.out.println("Average: " + avg + " chldren to get at least one of each gender.");
+		System.out.println("Number of families with 2 children: " + f2);
+		System.out.println("Number of families with 3 children: " + f3);
+		System.out.println("Number of families with 4 or more children: " + f4);
+
 		//// In the previous version of this program, you used a statement like:
 		//// double rnd = Math.random();
 		//// Where "rnd" is the variable that stores the generated random value.
